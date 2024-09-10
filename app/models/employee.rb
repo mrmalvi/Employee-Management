@@ -5,8 +5,12 @@ class Employee < ApplicationRecord
   validates :salary, numericality: { greater_than: 0 }
   validate :phone_numbers_validation
 
+  has_many :phone_numbers
+
+  accepts_nested_attributes_for :phone_numbers, allow_destroy: true
+
   def phone_numbers_validation
-    if phone_numbers.blank? || !phone_numbers.is_a?(Array) || phone_numbers.empty?
+    if phone_numbers.blank?
       errors.add(:phone_numbers, "must be a valid array of phone numbers")
     end
   end

@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_09_10_094528) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_10_104314) do
   create_table "employees", force: :cascade do |t|
     t.integer "employee_id", null: false
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email", null: false
-    t.json "phone_numbers", default: [], null: false
     t.date "doj", null: false
     t.decimal "salary", null: false
     t.datetime "created_at", null: false
@@ -24,4 +23,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_09_10_094528) do
     t.index ["employee_id"], name: "index_employees_on_employee_id", unique: true
   end
 
+  create_table "phone_numbers", force: :cascade do |t|
+    t.string "number"
+    t.integer "employee_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_phone_numbers_on_employee_id"
+  end
+
+  add_foreign_key "phone_numbers", "employees"
 end

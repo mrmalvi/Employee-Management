@@ -5,7 +5,7 @@ class CreateEmployees < ActiveRecord::Migration[7.0]
       t.string :first_name, null: false
       t.string :last_name, null: false
       t.string :email, null: false
-      t.json :phone_numbers, null: false, default: []
+      # t.json :phone_numbers, null: false, default: []
       t.date :doj, null: false
       t.decimal :salary, null: false
 

@@ -25,6 +25,7 @@ class TaxCalculator
       first_name: @employee.first_name,
       last_name: @employee.last_name,
       yearly_salary: total_salary,
+      phone_numbers: @employee.phone_numbers.pluck(:number),
       tax_amount: tax,
       cess_amount: cess
     }
