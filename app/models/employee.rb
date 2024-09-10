@@ -11,7 +11,7 @@ class Employee < ApplicationRecord
 
   def phone_numbers_validation
     if phone_numbers.blank?
-      errors.add(:phone_numbers, "must be a valid array of phone numbers")
+      errors.add(:phone_numbers, "Please enter a atleat one number")
     end
   end
 end
