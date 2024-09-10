@@ -30,6 +30,10 @@ response get
     "first_name": "Ram kumar",
     "last_name": "Yadav",
     "yearly_salary": "4000000.0",
+    "phone_numbers": [
+        "1234567890",
+        "1111111111"
+    ],
     "tax_amount": "662499.65",
     "cess_amount": "30000.0"
 }
