@@ -48,22 +48,27 @@ class TaxCalculator
   end
 
   def calculate_months_worked(join_date, end_of_fiscal_year)
-    (end_of_fiscal_year.year * 12 + end_of_fiscal_year.month) -
-      (join_date.year * 12 + join_date.month) + 1
+    start_months = join_date.year * 12 + join_date.month
+    end_months = end_of_fiscal_year.year * 12 + end_of_fiscal_year.month
+    end_months - start_months + 1
   end
 
   def calculate_loss_of_pay(join_date)
-    return 0 unless join_date.month == Date.new(fiscal_year, 4, 1).month
+    return 0 if join_date.month != Date.new(fiscal_year, 4, 1).month
+
     days_in_first_month = join_date.day - 1
     (days_in_first_month * @salary / 30.0)
   end
 
   def calculate_tax(salary)
-    TAX_SLABS.reduce(0) do |tax, slab|
-      next tax if salary <= slab[:min]
-      taxable_income = [salary, slab[:max]].min - slab[:min]
-      tax + taxable_income * slab[:rate]
+    tax = 0
+    TAX_SLABS.each do |slab|
+      if salary > slab[:min]
+        taxable_income = [salary, slab[:max]].min - slab[:min]
+        tax += taxable_income * slab[:rate]
+      end
     end
+    tax
   end
 
   def calculate_cess(salary)
